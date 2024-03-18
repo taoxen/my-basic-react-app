@@ -2,6 +2,7 @@
 import React from "react";
 import PropTypes from "prop-types";
 import "./App.css";
+import DisplayMessages from "./displayMessages.jsx";
 // import 'bootstrap/dist/css/bootstrap.css';
 // import { render } from "@testing-library/react";
 
@@ -79,11 +80,14 @@ class ToDoList extends React.Component {
     super(props);
   }
   render(props) {
+    const tsk = this.props.tasks.map((x) => <li key={x}> {x} </li>);
+    console.log(tsk);
     return (
       <ul>
-        {this.props.tasks.map((task) => (
+        {/* {this.props.tasks.map((task) => (
           <li key={task}>{task}</li>
-        ))}
+        ))} */}
+        {tsk}
       </ul>
     );
   }
@@ -478,7 +482,7 @@ class OnlyEvens extends React.Component {
   shouldComponentUpdate(nextProps, nextState) {
     console.log("Should I update?");
     // Change code below this line
-    if (nextProps.value % 2 == 0) return true;
+    if (nextProps.value % 2 === 0) return true;
     else return false;
     // Change code above this line
   }
@@ -674,7 +678,7 @@ class GameOfChance extends React.Component {
       counter: 0,
       winCount: 0,
       looseCount: 0,
-      expression: ''
+      expression: "",
     };
     this.handleClick = this.handleClick.bind(this);
     // this.expression = '';
@@ -684,17 +688,17 @@ class GameOfChance extends React.Component {
       // Complete the return statement:
       // console.log(prevState.counter);
       // console.log(this.expression)
-      
-      var wc = prevState.winCount;
-      var lc = prevState.looseCount ;
-      var expr =  Math.random() >= 0.5; 
 
-      expr ? wc = wc + 1 : lc = lc + 1;
+      var wc = prevState.winCount;
+      var lc = prevState.looseCount;
+      var expr = Math.random() >= 0.5;
+
+      expr ? (wc = wc + 1) : (lc = lc + 1);
       return {
         counter: prevState.counter + 1,
         winCount: wc,
         looseCount: lc,
-        expression: expr
+        expression: expr,
       };
     });
   }
@@ -703,7 +707,9 @@ class GameOfChance extends React.Component {
     // this.expression = Math.random() >= 0.5; // Change this line
     return (
       <div>
-        <button className="btn btn-primary" onClick={this.handleClick}>Play Again</button>
+        <button className="btn btn-primary" onClick={this.handleClick}>
+          Play Again
+        </button>
         {/* Change code below this line */}
         {/* {console.log(this.expression)} */}
         <Results fiftyFifty={this.state.expression} />
@@ -741,6 +747,9 @@ function App() {
         <Counter step={4} />
         <MyToggleButton /> 
         <MyKeyCapture />*/}
+          {/* <div className="col border border-primary p-4">
+            <ToDo />
+          </div>
           <div className="col border border-primary p-4">
             <ControlledInput />
           </div>
@@ -761,6 +770,10 @@ function App() {
           </div>
           <div className="col border border-primary p-4">
             <GameOfChance />
+          </div> */}
+
+          <div className="col border border-primary p-4">
+            <DisplayMessages />
           </div>
         </div>
       </div>
